@@ -1,5 +1,5 @@
 Feature: search
-  Scenario: Search csdn
+  Scenario: Search key as "Java"
     * Open the homepage
-    * Search "csdn"
-    * Have 4 result
+    * Search "java"
+    * Have 11 result
