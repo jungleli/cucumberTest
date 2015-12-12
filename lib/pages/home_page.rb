@@ -24,12 +24,10 @@ class HomePage < SitePrism::Page
 
 	def addBookmarks title, url
 		addItem.click
-		sleep 3
 		inputTitle.set title
 		inputUrl.set url
-		sleep 3
 		addBookmark.click
-		sleep 2
+		sleep 1
 	end
 
 	def searchDelItem byTitle
@@ -46,13 +44,13 @@ class HomePage < SitePrism::Page
 	def clickToDelBookmark byTitle
 		puts "===================clickToDelBookmark"		
 		delResult[0].click
-		sleep 3
+		sleep 1
 	end
 
 	def clickToDelNewBookmark byTitle
 		puts "===================clickToDelBookmark"		
 		addResult[0].click
-		sleep 3
+		sleep 1
 	end
 
 	def alertConfirm
