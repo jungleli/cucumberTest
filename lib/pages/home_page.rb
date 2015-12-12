@@ -4,10 +4,13 @@ class HomePage < SitePrism::Page
 	element :keyword, '#search'
 	element :totalNum, '#total'
 	element :addItem, '#add'
-	element :addBookmark, '#AddBookmark'
 	element :inputTitle, '#inputTitle'
 	element :inputUrl, '#inputURL'
+	element :addBookmark, '#AddBookmark'
 	elements :deleteItems, '.delete'
+	elements :delResult, "[title='Test Title To Delete']"
+	elements :addResult, "[title='Test Title To Add']"
+
 
 	def search content
 		keyword.set content
@@ -19,45 +22,54 @@ class HomePage < SitePrism::Page
 		totalNum.text.to_i
 	end
 
-	def addBookmark title,url
+	def addBookmarks title, url
 		addItem.click
+		sleep 3
 		inputTitle.set title
 		inputUrl.set url
+		sleep 3
 		addBookmark.click
 		sleep 2
 	end
 
-	def addResult
-		@session.driver.browser.switch_to.alert.text
-		puts @session.driver.browser.switch_to.alert.text
-
-		# @session.driver.browser.switch_to.alert.accept
+	def searchDelItem byTitle
+		puts "==================searchDelItem"
+		delResult.length
 	end
 
-	def getDelID
-		"Get ID of which will to delete============="
-		deleteItems[0]['rel']
+	def searchAddItem byTitle
+		puts "==================searchAddItem"
+		addResult.length
 	end
+	
 
-	def searchItemByDelID
-		0
-		# deleteItems.html().contain(getDelID).length
-	end
-
-	def delBookmarkConfirm
-		deleteItems[0].click
+	def clickToDelBookmark byTitle
+		puts "===================clickToDelBookmark"		
+		delResult[0].click
 		sleep 3
-		page.driver.browser.switch_to.alert.accept
-		sleep 10
 	end
 
-	def delBookmarkRefuse
-		deleteItems[0].click
+	def clickToDelNewBookmark byTitle
+		puts "===================clickToDelBookmark"		
+		addResult[0].click
+		sleep 3
+	end
+
+	def alertConfirm
+		puts "===================alertConfirm"
+		page.driver.browser.switch_to.alert.accept
+		sleep 1
+	end
+
+	def alertRefuse
+		puts "===================alertRefuse"
 		page.driver.browser.switch_to.alert.dismiss
 		sleep 1
 	end
 
-
-
+	def  alertContent
+		puts "====================alertContent"
+		page.driver.browser.switch_to.alert.text
+	end
 	
 end
